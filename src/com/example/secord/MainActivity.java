@@ -6,11 +6,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 
 import android.R.string;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
@@ -45,6 +47,25 @@ public class MainActivity extends Activity {
 
     AudioRecoderUtils mAudioRecoderUtils;
     
+
+	Handler handler=new Handler();
+    
+	Runnable runnable=new Runnable(){
+		   @Override
+		   public void run() {
+		    // TODO Auto-generated method stub
+		    //要做的事情，这里再次调用此Runnable对象，以实现每两秒实现一次的定时器操作
+			
+			   String file  = mAudioRecoderUtils.stopRecord();       
+			   
+			   tv3.setText(file+".amr finished");
+			   
+			   mAudioRecoderUtils.startRecord();       
+			   
+			   handler.postDelayed(this, 60*1000);
+		   } 
+		};
+	
     public void Secord_Click(View v)
     {
     	if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -53,7 +74,7 @@ public class MainActivity extends Activity {
         }
     	
     	mAudioRecoderUtils.startRecord();
-    	
+    	handler.postDelayed(runnable, 60*1000);
 
     }
     
@@ -117,5 +138,24 @@ public class MainActivity extends Activity {
             tv3.setText("文件上传失败！上传文件为：" + oldFilePath);
             tv3.setText("报错信息toString：" + e.toString());
         }
+    }
+
+    public static String Time()
+    {
+    	Calendar calendar = Calendar.getInstance();
+    	//获取系统的日期
+    	//小时
+    	int hour = calendar.get(Calendar.HOUR_OF_DAY);
+    	//分钟
+    	int minute = calendar.get(Calendar.MINUTE);
+    	//秒
+    	int second = calendar.get(Calendar.SECOND);
+
+    	String hh = hour<10?"0"+hour:String.valueOf(hour);
+    	String mm = minute<10?"0"+minute:String.valueOf(minute);
+    	String ss = second<10?"0"+second:String.valueOf(second);
+    	
+    	
+    	return hh+mm+ss;
     }
 }

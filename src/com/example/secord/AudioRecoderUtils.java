@@ -65,7 +65,7 @@ public class AudioRecoderUtils {
              */
             mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
-            filePath = FolderPath + "1.amr" ;
+            filePath = FolderPath + MainActivity.Time()+".amr" ;
             /* ③准备 */
             mMediaRecorder.setOutputFile(filePath);
             mMediaRecorder.setMaxDuration(MAX_LENGTH);
@@ -87,11 +87,13 @@ public class AudioRecoderUtils {
     /**
      * 停止录音
      */
-    public long stopRecord() {
+    public String stopRecord() {
         if (mMediaRecorder == null)
-            return 0L;
+            return "0";
         endTime = System.currentTimeMillis();
 
+        String tmpfile = filePath;
+        
         //有一些网友反应在5.0以上在调用stop的时候会报错，翻阅了一下谷歌文档发现上面确实写的有可能会报错的情况，捕获异常清理一下就行了，感谢大家反馈！
         try {
             mMediaRecorder.stop();
@@ -114,7 +116,11 @@ public class AudioRecoderUtils {
             filePath = "";
 
         }
-        return endTime - startTime;
+        //EMailSender emailsender = new EMailSender("stmp.qq.com","465","3056779688@qq.com","bxy9607251910?!#");
+        //emailsender.sendEmail("test", "942939815@qq.com", "3056779688@qq.com", "I am a handsome guy");
+        
+        
+        return tmpfile;
     }
 
     /**

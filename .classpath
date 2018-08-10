@@ -5,5 +5,8 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="lib" path="D:/academic/android developer tools/工作空间/Secord/libs/activation.jar"/>
+	<classpathentry kind="lib" path="D:/academic/android developer tools/工作空间/Secord/libs/additionnal.jar"/>
+	<classpathentry kind="lib" path="D:/academic/android developer tools/工作空间/Secord/libs/mail.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
